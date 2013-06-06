@@ -24,7 +24,6 @@
                 })
                 .done(null, function (error) {
                     console.log(error.message);
-
                 });
 
         });
@@ -34,7 +33,7 @@
         play: function () {
             getPicturesAsync().done( function(pictures) {
                 var pictureFrame = document.getElementById("pictureFrame");
-                pictureFrame.src = pictures[0].src;
+                pictureFrame.src = pictures[1].src;
             });
 
         }
