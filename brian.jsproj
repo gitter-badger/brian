@@ -60,6 +60,7 @@
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\pictureFrame.js" />
     <None Include="brian_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
