@@ -4,7 +4,7 @@
     var getPicturesAsync = function() {
         return new WinJS.Promise(function (comp, err, prog) {
             var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
-            picturesLibrary.getFolderAsync('BrianMedia\\Beach')
+            picturesLibrary.getFolderAsync('BrianMedia')
                 .then(function (mediaFolder) {
                     if (!mediaFolder) {
                         throw ("no BrianMedia folder");
