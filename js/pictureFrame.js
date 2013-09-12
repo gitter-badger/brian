@@ -1,8 +1,10 @@
 ﻿var PictureFrame = (function () {
     "use strict";
 
+    var picturesList = new WinJS.Binding.List();
+
     var getPicturesAsync = function() {
-        return new WinJS.Promise(function (comp, err, prog) {
+        return new WinJS.Promise(function (complete, error, progress) {
             var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
             picturesLibrary.getFolderAsync('BrianMedia')
                 .then(function (mediaFolder) {
@@ -13,14 +15,13 @@
                     return mediaFolder.getFilesAsync();
                 })
                 .then(function (files) {
-                    var pictures = [];
                     files.forEach(function (imgFile, i, ar) {
                         var imgURL = URL.createObjectURL(imgFile);
-                        pictures.push({ name: imgFile.name, src: imgURL });
-                        //URL.revokeObjectURL(imgURL); //FIX me safe to do now or after used ? CLEANUP mem leak
+                        picturesList.push({ title: imgFile.name, picture: imgURL });
+                        //URL.revokeObjectURL(imgURL); //FIXME safe to do now or after used ? CLEANUP mem leak
                     });
 
-                    comp(pictures);
+                    complete();
                 })
                 .done(null, function (error) {
                     console.log(error.message);
@@ -29,13 +30,8 @@
         });
     };
 
-    return {
-        play: function () {
-            getPicturesAsync().done( function(pictures) {
-                var pictureFrame = document.getElementById("pictureFrame");
-                pictureFrame.src = pictures[1].src;
-            });
-
-        }
-    };
-})();
+    WinJS.Namespace.define("PicturesModel", {
+        getPicturesAsync: getPicturesAsync,
+        picturesList: picturesList
+        });
+ })();

@@ -18,8 +18,8 @@
                 // Restore application state here.
             }
 
-            PictureFrame.play();
-            args.setPromise(WinJS.UI.processAll());
+            args.setPromise(WinJS.UI.processAll()
+                .then(PicturesModel.getPicturesAsync)); //FIXME do we also need to wait till DOM Ready?
         }
     };
 

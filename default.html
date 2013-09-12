@@ -16,6 +16,18 @@
 
 </head>
 <body>
-    <img id="pictureFrame" />
+    <div id="pictureTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="overlaidPictureTemplate">
+            <img class="image" data-win-bind="src: picture; alt: title" />
+            <div class="overlay">
+                <h2 class="ItemTitle" data-win-bind="innerText: title"></h2>
+            </div>
+        </div>
+    </div>
+     
+    <div id="pictureFrame"
+         data-win-control="WinJS.UI.FlipView" 
+         data-win-options="{ itemDataSource: PicturesModel.picturesList.dataSource, itemTemplate: pictureTemplate }"> 
+    </div>
 </body>
 </html>
